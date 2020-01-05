@@ -48,7 +48,7 @@ class smoothNMF():
 # this is the case with no sparsity and smoothness
 
     def __init__(self, sparsity=0, smoothness=0, early_stopping=0,
-    gamma1=1.001, gamma2=1.001, betaH=0, betaW=0, n_components=None, max_iter=200):
+    gamma1=1.001, gamma2=1.001, betaH=0.1, betaW=0.1, n_components=None, max_iter=200):
 
         self.max_iter = max_iter
         self.sparsity = sparsity
@@ -417,7 +417,7 @@ def smooth_nmf(X, W, H, n_components=None, init=None, sparsity=0, smoothness=0, 
         #saving the model checkpoints
         if checkpoint_idx is not None:
             if it in checkpoint_idx:
-                chkpt_data = {'H':H,'W':W}
+                chkpt_data = {'H':H,'W':W,'iteration':it,'objective':obj[-1]}
                 chkpt_file[str(it)] = chkpt_data
                 #pickle.dump(chkpt_data, chkpt_file)
 
